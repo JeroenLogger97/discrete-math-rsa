@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="discretemathematics.controller.DecryptionController">
+    <children>
+        <Label layoutX="354.0" layoutY="14.0" text="Decryption">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+        <Group layoutX="-7.0" layoutY="-70.0">
+            <children>
+                <Label fx:id="pLabel" layoutX="220.0" layoutY="132.0" text="p is ..." />
+                <Label fx:id="qLabel" layoutX="220.0" layoutY="154.0" text="q is ..." />
+                <Label fx:id="timeTakenToFactorizeN" layoutX="220.0" layoutY="176.0" text="Time busy finding p and q: ..." />
+            </children>
+        </Group>
+        <Button fx:id="stepTwoButton" layoutX="41.0" layoutY="155.0" mnemonicParsing="false" onAction="#stepTwoClicked" text="Step 1: Calculate d" />
+        <Label fx:id="dLabel" layoutX="213.0" layoutY="159.0" text="Value of d found: ..." />
+        <Button fx:id="stepThreeButton" disable="true" layoutX="41.0" layoutY="457.0" mnemonicParsing="false" onAction="#stepThreeClicked" text="Step 2: decrypt message" />
+        <Label layoutX="455.0" layoutY="55.0" text="N" />
+        <TextField fx:id="nTextField" layoutX="497.0" layoutY="51.0" prefHeight="25.0" prefWidth="210.0" />
+        <TextArea fx:id="encryptedMessageTextArea" layoutX="497.0" layoutY="193.0" prefHeight="108.0" prefWidth="210.0" wrapText="true" />
+        <Label layoutX="455.0" layoutY="89.0" text="p" />
+        <TextField fx:id="pTextField" disable="true" layoutX="497.0" layoutY="85.0" prefHeight="25.0" prefWidth="145.0" />
+        <TextField fx:id="qTextField" disable="true" layoutX="497.0" layoutY="120.0" prefHeight="25.0" prefWidth="145.0" />
+        <Label layoutX="455.0" layoutY="124.0" text="q" />
+        <TextField fx:id="eTextField" layoutX="497.0" layoutY="155.0" prefHeight="25.0" prefWidth="145.0" />
+        <Label layoutX="455.0" layoutY="159.0" text="e" />
+        <Label layoutX="365.0" layoutY="196.0" prefHeight="18.0" prefWidth="152.0" text="Encrypted message" />
+        <Label layoutX="372.0" layoutY="311.0" text="Encoded message" />
+        <TextArea fx:id="encodedMessageArea" layoutX="497.0" layoutY="311.0" prefHeight="108.0" prefWidth="210.0" wrapText="true" />
+        <TextArea fx:id="DecryptedMessageArea" editable="false" layoutX="497.0" layoutY="429.0" prefHeight="108.0" prefWidth="210.0" wrapText="true" />
+        <Label layoutX="366.0" layoutY="429.0" text="Decrypted message" />
+    </children>
+</AnchorPane>

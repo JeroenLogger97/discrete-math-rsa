@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="discretemathematics.controller.MainFrameController"
+            prefHeight="629.0" prefWidth="800.0">
+
+    <TabPane>
+        <Tab fx:id="encryptionTab" text="Encryption">
+            <fx:include source="encryption.fxml"/>
+        </Tab>
+
+        <Tab fx:id="decryptionTab" text="Decryption">
+            <fx:include source="decryption.fxml"/>
+        </Tab>
+
+    </TabPane>
+</AnchorPane>

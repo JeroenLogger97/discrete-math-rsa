@@ -8,7 +8,7 @@ import java.util.List;
 
 public class RsaUtil {
     
-    static BigInteger[] getPrimeFactors(BigInteger n) {
+    public static BigInteger[] getPrimeFactors(BigInteger n) {
         
         BigInteger two = BigInteger.valueOf(2);
         List<BigInteger> factors = new ArrayList<>();
@@ -40,7 +40,7 @@ public class RsaUtil {
         return primeFactors;
     }
     
-    static BigInteger chooseE(BigInteger p, BigInteger q) {
+    public static BigInteger chooseE(BigInteger p, BigInteger q) {
         // Choose e:
         // - random number below n
         // - not containing any of the prime factors of phi = (p - 1) * (q - 1)
@@ -51,16 +51,15 @@ public class RsaUtil {
         
         SecureRandom random = new SecureRandom();
         
-        // todo use 65537 as e? if doesn't work: check next prime number?
-//        int bitLength = p.multiply(q).bitLength() - 1;
-        int bitLength = 16;
+        // ensure e is smaller than n and also have max bitLenght on e for performance reasons
+        int bitLength = Math.min(p.multiply(q).bitLength() - 1, 16);
         
         BigInteger e;
         while (true) {
-            // e must be smaller than n, so generate BigInteger where bit length is bitlength of n - 1
             // this constructor always constructs a non-negative BigInteger
             BigInteger possibleE = new BigInteger(bitLength, random);
             
+            //todo use a.gcd(b) == 1
             boolean sharesPrimeFactor = false;
             for (BigInteger factor : getPrimeFactors(possibleE)) {
                 if (phiFactors.contains(factor)) {
@@ -81,25 +80,12 @@ public class RsaUtil {
         return e;
     }
     
-    private static BigInteger getPhi(BigInteger p, BigInteger q) {
+    public static BigInteger getPhi(BigInteger p, BigInteger q) {
         return p.subtract(BigInteger.ONE).multiply(q.subtract(BigInteger.ONE));
     }
     
-    static BigInteger findD(BigInteger e, BigInteger phi) {
+    public static BigInteger findD(BigInteger e, BigInteger phi) {
         // find inverse d for e: (d * e) mod (p - 1) * (q - 1) = 1
-//        BigInteger d = BigInteger.valueOf(0);
-//        //todo is this true?
-//        // we know that '((pMinusOneTimesQMinusOne + 1) * d) % pMinusOneTimesQMinusOne' will always return '1', so set that as upper bound
-//        for (BigInteger i = BigInteger.valueOf(1); i <= pMinusOneTimesQMinusOne.add(BigInteger.valueOf(1)); i++) {
-//            // if (d * e) mod (p - 1) * (q - 1) = 1
-//            if ((i * e) % pMinusOneTimesQMinusOne == 1) {
-//                d = i;
-//                break;
-//            }
-//        }
-        
-        // phi = (p - 1) * (q - 1)
-        // todo find inverse d for e: '(d * e) mod phi = 1' instead of using BigInteger method
         return e.modInverse(phi);
     }
 }

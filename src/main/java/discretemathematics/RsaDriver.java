@@ -23,7 +23,7 @@ public class RsaDriver {
         
     }
     
-    static String encrypt(BigInteger n, BigInteger e, String message) {
+    public static String encrypt(BigInteger n, BigInteger e, String message) {
         StringBuilder sb = new StringBuilder();
         
         for (int i = 0; i < message.length(); i++) {
@@ -44,16 +44,7 @@ public class RsaDriver {
         return m.modPow(e, n);
     }
     
-    static String decrypt(BigInteger n, BigInteger e, String encrypted) {
-        BigInteger[] primeFactors = RsaUtil.getPrimeFactors(n);
-        BigInteger p = primeFactors[0];
-        BigInteger q = primeFactors[1];
-        
-        BigInteger phi = p.subtract(BigInteger.ONE).multiply(q.subtract(BigInteger.ONE));
-        
-        BigInteger d = RsaUtil.findD(e, phi);
-        System.out.println("found d " + d + " for e " + e + " and n " + n);
-    
+    public static String decrypt(BigInteger n, BigInteger d, String encrypted) {
         String[] mArray = encrypted.split(",");
     
         StringBuilder sb = new StringBuilder();
@@ -61,7 +52,7 @@ public class RsaDriver {
         for (String part : mArray) {
             BigInteger m = new BigInteger(part);
         
-            BigInteger decrypted = decrypt(p.multiply(q), d, m);
+            BigInteger decrypted = decrypt(n, d, m);
         
             // convert from BigInteger to char
             sb.append((char) decrypted.intValueExact());
